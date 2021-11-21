@@ -1,18 +1,30 @@
-import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text, ActivityIndicator} from 'react-native';
+import useMovies from '../hooks/useMovies';
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const {movies, loading} = useMovies();
 
-  const goDetail = () => {
-    navigation.navigate('detail' as any);
-  };
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <ActivityIndicator size="large" color="red" />
+      </View>
+    );
+  }
 
   return (
     <View>
-      <Text>homeScreen</Text>
-      <Button title="Go to Details" onPress={goDetail} />
+      {movies.results.map(movie => (
+        <View key={movie.id}>
+          <Text>{movie.title}</Text>
+        </View>
+      ))}
     </View>
   );
 };
