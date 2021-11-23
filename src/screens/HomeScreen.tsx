@@ -1,32 +1,40 @@
 import React from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import {StyleSheet, useWindowDimensions, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Carousel from 'react-native-snap-carousel';
+import FullScreenLoader from '../components/FullScreenLoader';
+import MoviePoster from '../components/MoviePoster';
 import useMovies from '../hooks/useMovies';
 
 const HomeScreen = () => {
   const {movies, loading} = useMovies();
+  const {top} = useSafeAreaInsets();
+  const {width} = useWindowDimensions();
 
   if (loading) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <ActivityIndicator size="large" color="red" />
-      </View>
-    );
+    return <FullScreenLoader />;
   }
 
   return (
-    <View>
-      {movies.results.map(movie => (
-        <View key={movie.id}>
-          <Text>{movie.title}</Text>
-        </View>
-      ))}
+    <View style={{marginTop: top + 20}}>
+      <Carousel
+        contentContainerCustomStyle={styles.carouselContainer}
+        data={movies.results}
+        renderItem={({item: movie}) => (
+          <MoviePoster movie={movie} key={movie.id} />
+        )}
+        sliderWidth={width}
+        itemWidth={200}
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  carouselContainer: {
+    height: 330,
+    alignItems: 'center',
+  },
+});
 
 export default HomeScreen;
