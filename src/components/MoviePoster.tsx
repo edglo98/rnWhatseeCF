@@ -4,13 +4,15 @@ import {Movie} from '../interfaces/movieInterfaces';
 
 interface Props {
   movie: Movie;
+  height?: number;
+  width?: number;
 }
 
-const MoviePoster = ({movie}: Props) => {
+const MoviePoster = ({movie, height = 300, width = 200}: Props) => {
   const imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
   return (
-    <View style={styles.imageContainer}>
+    <View style={[styles.imageContainer, {height, width}]}>
       <Image style={styles.image} source={{uri: imageUrl}} />
     </View>
   );
@@ -20,8 +22,6 @@ export default MoviePoster;
 
 const styles = StyleSheet.create({
   imageContainer: {
-    width: 200,
-    height: 300,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
