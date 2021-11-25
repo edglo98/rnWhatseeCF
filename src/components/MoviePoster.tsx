@@ -1,6 +1,9 @@
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/core';
 import {Movie} from '../interfaces/movieInterfaces';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParams} from '../navigations/MainNavigation';
 
 interface Props {
   movie: Movie;
@@ -8,13 +11,23 @@ interface Props {
   width?: number;
 }
 
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParams, 'home'>;
+
 const MoviePoster = ({movie, height = 300, width = 200}: Props) => {
   const imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  const handleNavigateToMovieDetails = () => {
+    navigation.navigate('moviedetails', movie);
+  };
 
   return (
-    <View style={[styles.imageContainer, {height, width}]}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={handleNavigateToMovieDetails}
+      style={[styles.imageContainer, {height, width}]}>
       <Image style={styles.image} source={{uri: imageUrl}} />
-    </View>
+    </TouchableOpacity>
   );
 };
 

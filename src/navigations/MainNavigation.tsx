@@ -2,8 +2,14 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
+import {Movie} from '../interfaces/movieInterfaces';
 
-const MainStack = createStackNavigator();
+export type RootStackParams = {
+  home: undefined;
+  moviedetails: Movie;
+};
+
+const MainStack = createStackNavigator<RootStackParams>();
 
 const MainNavigation = () => {
   return (
@@ -15,7 +21,7 @@ const MainNavigation = () => {
         },
       }}>
       <MainStack.Screen name="home" component={HomeScreen} />
-      <MainStack.Screen name="detail" component={DetailScreen} />
+      <MainStack.Screen name="moviedetails" component={DetailScreen} />
     </MainStack.Navigator>
   );
 };

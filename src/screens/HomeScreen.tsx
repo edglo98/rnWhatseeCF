@@ -37,12 +37,12 @@ const HomeScreen = () => {
           />
         </View>
         <HorizontalSlider
-          movies={popularMovies.results}
-          title="Ahora en cines"
-        />
-        <HorizontalSlider
           movies={topRadeMovies.results}
           title="Mejor votadas"
+        />
+        <HorizontalSlider
+          movies={popularMovies.results}
+          title="Ahora en cines"
         />
         <HorizontalSlider
           movies={upcomingMovies.results}
