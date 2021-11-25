@@ -8,7 +8,13 @@ import MoviePoster from '../components/MoviePoster';
 import useMovies from '../hooks/useMovies';
 
 const HomeScreen = () => {
-  const {movies, loading} = useMovies();
+  const {
+    nowPlayingMovies,
+    popularMovies,
+    topRadeMovies,
+    upcomingMovies,
+    loading,
+  } = useMovies();
   const {top} = useSafeAreaInsets();
   const {width} = useWindowDimensions();
 
@@ -22,7 +28,7 @@ const HomeScreen = () => {
         <View>
           <Carousel
             contentContainerCustomStyle={styles.carouselContainer}
-            data={movies.results}
+            data={nowPlayingMovies.results}
             renderItem={({item: movie}) => (
               <MoviePoster movie={movie} key={movie.id} />
             )}
@@ -30,9 +36,18 @@ const HomeScreen = () => {
             itemWidth={200}
           />
         </View>
-        <HorizontalSlider movies={movies.results} title="En cine" />
-        <HorizontalSlider movies={movies.results} title="En cine" />
-        <HorizontalSlider movies={movies.results} title="En cine" />
+        <HorizontalSlider
+          movies={popularMovies.results}
+          title="Ahora en cines"
+        />
+        <HorizontalSlider
+          movies={topRadeMovies.results}
+          title="Mejor votadas"
+        />
+        <HorizontalSlider
+          movies={upcomingMovies.results}
+          title="Proximamente"
+        />
       </View>
     </ScrollView>
   );
