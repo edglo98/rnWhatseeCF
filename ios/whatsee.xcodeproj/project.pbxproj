@@ -36,6 +36,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = whatsee/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = whatsee/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = whatsee/main.m; sourceTree = "<group>"; };
+		19ECE817275088A200770918 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-whatsee-whatseeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatsee-whatseeTests.release.xcconfig"; path = "Target Support Files/Pods-whatsee-whatseeTests/Pods-whatsee-whatseeTests.release.xcconfig"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-whatsee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-whatsee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-whatsee-whatseeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatsee-whatseeTests.debug.xcconfig"; path = "Target Support Files/Pods-whatsee-whatseeTests/Pods-whatsee-whatseeTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +97,14 @@
 			name = whatsee;
 			sourceTree = "<group>";
 		};
+		19ECE8162750885200770918 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				19ECE817275088A200770918 /* Ionicons.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +125,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				19ECE8162750885200770918 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* whatsee */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* whatseeTests */,
@@ -145,7 +155,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-whatsee-whatseeTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-whatsee-whatseeTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
