@@ -1,28 +1,36 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  FlatListProps,
+  ListRenderItemInfo,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-import {Movie} from '../interfaces/movieInterfaces';
-import MoviePoster from './MoviePoster';
 
-interface Props {
-  movies: Movie[];
-  title: string;
+interface Props extends FlatListProps<any> {
+  data: any[];
+  title: JSX.Element | string;
+  renderItem: (props: ListRenderItemInfo<any>) => JSX.Element;
 }
 
-const HorizontalSlider = ({movies, title}: Props) => {
+const HorizontalSlider = ({data, title, renderItem, ...rest}: Props) => {
   return (
     <View>
-      {title && <Text style={styles.title}>{title}</Text>}
+      {typeof title === 'string' ? (
+        <Text style={styles.title}>{title}</Text>
+      ) : (
+        title
+      )}
       <FlatList
-        data={movies}
+        {...rest}
+        data={data}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.list}
         keyExtractor={item => item.id.toString()}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
-        renderItem={({item: movie}) => (
-          <MoviePoster height={200} width={130} movie={movie} key={movie.id} />
-        )}
+        renderItem={renderItem}
       />
     </View>
   );

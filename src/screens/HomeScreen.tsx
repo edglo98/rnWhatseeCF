@@ -37,16 +37,40 @@ const HomeScreen = () => {
           />
         </View>
         <HorizontalSlider
-          movies={topRadeMovies.results}
+          data={topRadeMovies.results}
           title="Mejor votadas"
+          renderItem={({item: movie}) => (
+            <MoviePoster
+              height={200}
+              width={130}
+              movie={movie}
+              key={movie.id}
+            />
+          )}
         />
         <HorizontalSlider
-          movies={popularMovies.results}
+          data={popularMovies.results}
           title="Ahora en cines"
+          renderItem={({item: movie}) => (
+            <MoviePoster
+              height={200}
+              width={130}
+              movie={movie}
+              key={movie.id}
+            />
+          )}
         />
         <HorizontalSlider
-          movies={upcomingMovies.results}
+          data={upcomingMovies.results}
           title="Proximamente"
+          renderItem={({item: movie}) => (
+            <MoviePoster
+              height={200}
+              width={130}
+              movie={movie}
+              key={movie.id}
+            />
+          )}
         />
       </View>
     </ScrollView>

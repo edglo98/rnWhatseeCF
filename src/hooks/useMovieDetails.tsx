@@ -4,7 +4,7 @@ import movieDB from '../api/movieDB';
 
 interface MovieDetails {
   movieInformation: MovieWithDetails;
-  movieCast: Credits;
+  movieCredits: Credits;
 }
 const useMovieDetails = (movieId: number) => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const useMovieDetails = (movieId: number) => {
   const fetchMovieDetails = async (id: number) => {
     setLoading(true);
     try {
-      const [{data: movieDetailsResponse}, {data: movieCastResponse}] =
+      const [{data: movieDetailsResponse}, {data: movieCreditsResponse}] =
         await Promise.all([
           movieDB.get<MovieWithDetails>(`/${id}`),
           movieDB.get<Credits>(`/${id}/credits`),
@@ -21,7 +21,7 @@ const useMovieDetails = (movieId: number) => {
 
       setMovieDetails({
         movieInformation: movieDetailsResponse,
-        movieCast: movieCastResponse,
+        movieCredits: movieCreditsResponse,
       });
     } catch (error) {
       console.log(error);
