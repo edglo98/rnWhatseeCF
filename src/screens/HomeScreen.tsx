@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, useWindowDimensions, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
-import ImageColors from 'react-native-image-colors';
 import FullScreenLoader from '../components/FullScreenLoader';
 import GradientBackground from '../components/GradientBackground';
 import HorizontalSlider from '../components/HorizontalSlider';
 import MoviePoster from '../components/MoviePoster';
+import useGradientContext from '../hooks/useGradientContext';
 import useMovies from '../hooks/useMovies';
+import {getColorsFromImage} from '../utils/colors';
 
 const HomeScreen = () => {
   const {
@@ -17,23 +18,28 @@ const HomeScreen = () => {
     upcomingMovies,
     loading,
   } = useMovies();
+  const {updateColors} = useGradientContext();
   const {top} = useSafeAreaInsets();
   const {width} = useWindowDimensions();
 
   const getPosterColor = async (index: number) => {
     const posterPath = nowPlayingMovies.results[index].poster_path;
     const uriImg = `https://image.tmdb.org/t/p/w500${posterPath}`;
-    const colors = await ImageColors.getColors(uriImg, {
-      fallback: '#228B22',
-      cache: true,
-      key: 'unique_key',
+    const [primary = 'blue', secondary = 'blue'] = await getColorsFromImage(
+      uriImg,
+    );
+    updateColors({
+      primary,
+      secondary,
     });
-    if (colors.platform === 'android') {
-      return [colors.dominant, colors.average, colors.vibrant];
-    } else if (colors.platform === 'ios') {
-      return [colors.background, colors.primary, colors.secondary];
-    }
   };
+
+  useEffect(() => {
+    if (nowPlayingMovies.results.length > 0) {
+      getPosterColor(0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nowPlayingMovies.results]);
 
   if (loading) {
     return <FullScreenLoader />;
